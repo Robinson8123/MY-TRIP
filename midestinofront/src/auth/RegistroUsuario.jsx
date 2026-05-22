@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useRegistroUsuario } from "../hooks/useRegistroUsuario";
+import { iniciarSesion as imgIniciarSesion } from "../images";
 
 export const RegistroUsuario = () => {
   const {
@@ -236,7 +237,7 @@ export const RegistroUsuario = () => {
         <figure>
           <img
             className="w-[90%] object-cover"
-            src="/src/images/iniciarSesion.svg"
+            src={imgIniciarSesion}
             alt="Imagen de registro de usuarios"
           />
         </figure>

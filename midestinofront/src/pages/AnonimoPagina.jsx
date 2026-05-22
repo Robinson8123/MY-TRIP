@@ -7,6 +7,7 @@ import { planesPromocionales } from "../helpers/TarjetasPromocionales";
 import { useContext } from "react";
 import { UsuarioContext } from "../context/UsuarioContext";
 import { CaruselDeInformacion } from "../components/CaruselDeInformacion";
+import { fondo1 } from "../images";
 
 export const AnonimoPagina = () => {
   const { usuarioActivo, isUsuarioActivo } = useContext(UsuarioContext);
@@ -27,7 +28,7 @@ export const AnonimoPagina = () => {
 
       <figure className="absolute w-full h-full top-0 -z-10 bg-cover">
         <img
-          src="/src/images/fondo1.jpg"
+          src={fondo1}
           alt="fondo"
           className="w-full h-full object-cover filter brightness-75"
         />

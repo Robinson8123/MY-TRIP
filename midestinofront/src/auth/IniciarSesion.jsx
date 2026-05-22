@@ -1,5 +1,6 @@
 import { Link } from "react-router-dom";
 import { useIniciarSesion } from "../hooks";
+import { iniciarSesion as imgIniciarSesion } from "../images";
 
 export const IniciarSesion = () => {
   const { formState, onIniciarSesion, onInputChange } = useIniciarSesion();
@@ -92,7 +93,7 @@ export const IniciarSesion = () => {
         <figure className="hidden md:block">
           <img
             className="w-[90%] object-cover"
-            src="/src/images/iniciarSesion.svg"
+            src={imgIniciarSesion}
             alt="images iniciarSesion"
           />
         </figure>
