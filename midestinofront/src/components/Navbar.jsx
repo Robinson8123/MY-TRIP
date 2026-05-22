@@ -46,7 +46,7 @@ export const Navbar = () => {
           <div className="hidden md:flex items-center gap-2">
             <Link
               to="/descargar-app"
-              className="flex items-center gap-1.5 py-2 px-4 bg-green-500 hover:bg-green-600 text-sm text-white font-bold rounded-md transition duration-200"
+              className="flex items-center gap-1.5 py-2 px-4 bg-blue-500 hover:bg-blue-700 text-sm text-white font-bold rounded-md transition duration-200"
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5"
@@ -110,7 +110,7 @@ export const Navbar = () => {
           <div className="md:hidden bg-white border-t border-gray-200 px-6 py-4 flex flex-col gap-3">
             <Link
               to="/descargar-app"
-              className="flex items-center justify-center gap-2 py-2 px-4 bg-green-500 text-white font-bold rounded-md text-center"
+              className="flex items-center justify-center gap-2 py-2 px-4 bg-blue-500 hover:bg-blue-700 text-white font-bold rounded-md text-center"
               onClick={cerrarMenu}
             >
               <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
