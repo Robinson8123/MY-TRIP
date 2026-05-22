@@ -211,6 +211,18 @@ export const Chatbot = () => {
       payload.ciudadDestino = ciudadDestino;
     }
 
+    // Enviar historial de conversación (últimos 10 mensajes, excluyendo el loading)
+    const historial = messages
+      .filter((m) => !m.isLoading && m.text && m.text !== "Escribiendo...")
+      .slice(-10)
+      .map((m) => ({
+        rol: m.sender === "user" ? "user" : "assistant",
+        mensaje: m.text,
+      }));
+    if (historial.length > 0) {
+      payload.historialConversacion = historial;
+    }
+
     return payload;
   };
 
