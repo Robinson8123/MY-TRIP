@@ -11,6 +11,7 @@ import pandas as pd
 import numpy as np
 from sklearn.metrics.pairwise import cosine_similarity
 from sklearn.preprocessing import LabelEncoder, MinMaxScaler
+from sklearn.neural_network import MLPRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import mean_absolute_error, mean_squared_error
 
@@ -138,40 +139,117 @@ def filtrado_contenido(valoraciones, planes_feat, features, cliente_id, top_n=5)
     return sorted(candidatos, key=lambda x: -x[1])[:top_n]
 
 
-# ── 4. SISTEMA HÍBRIDO ────────────────────────────────────────────────────────
+# ── 4. RED NEURONAL (MLPRegressor) ───────────────────────────────────────────
+
+def red_neuronal(valoraciones, planes_feat, features, cliente_id, top_n=6):
+    """
+    Red neuronal MLP que predice el rating de un cliente para planes no vistos.
+    Arquitectura: capas ocultas (64, 32, 16) con activación ReLU.
+    Entradas: [usuario_encoded, tipo_encoded, precio_norm, valoracion_norm]
+    Salida: puntuacion predicha (1-5)
+    """
+    if len(valoraciones) < 5:
+        return []
+
+    le_user = LabelEncoder()
+    valoraciones = valoraciones.copy()
+    valoraciones['user_enc'] = le_user.fit_transform(valoraciones['cliente_id'])
+
+    X, y = [], []
+    for _, row in valoraciones.iterrows():
+        plan_row = planes_feat[planes_feat['plan_id'] == row['plan_id']]
+        if plan_row.empty:
+            continue
+        idx = plan_row.index[0]
+        feat = list(features[planes_feat.index.get_loc(idx)])
+        X.append([row['user_enc']] + feat)
+        y.append(row['puntuacion'])
+
+    if len(X) < 5:
+        return []
+
+    X, y = np.array(X), np.array(y)
+    scaler = MinMaxScaler()
+    X_scaled = scaler.fit_transform(X)
+
+    mlp = MLPRegressor(
+        hidden_layer_sizes=(64, 32, 16),
+        activation='relu',
+        max_iter=500,
+        random_state=42,
+        early_stopping=True,
+        validation_fraction=0.15,
+        n_iter_no_change=10,
+    )
+    mlp.fit(X_scaled, y)
+
+    planes_vistos = set(valoraciones[valoraciones['cliente_id'] == cliente_id]['plan_id'])
+    if cliente_id in le_user.classes_:
+        user_enc = le_user.transform([cliente_id])[0]
+    else:
+        user_enc = 0
+
+    predicciones = []
+    for i, row in planes_feat.iterrows():
+        pid = int(row['plan_id'])
+        if pid in planes_vistos:
+            continue
+        idx = planes_feat.index.get_loc(i)
+        feat = list(features[idx])
+        x = np.array([[user_enc] + feat])
+        x_scaled = scaler.transform(x)
+        score = float(mlp.predict(x_scaled)[0])
+        predicciones.append((pid, score))
+
+    return sorted(predicciones, key=lambda x: -x[1])[:top_n]
+
+
+# ── 5. SISTEMA HÍBRIDO ────────────────────────────────────────────────────────
 
 def recomendar_hibrido(cliente_id, valoraciones, planes, top_n=6):
-    """Combina filtrado colaborativo y basado en contenido."""
+    """Combina red neuronal (MLP) + filtrado colaborativo + basado en contenido."""
     matriz, features, planes_feat = preprocesar_datos(valoraciones, planes)
 
+    nn  = red_neuronal(valoraciones, planes_feat, features, cliente_id, top_n)
     col = filtrado_colaborativo(matriz, cliente_id, top_n)
     con = filtrado_contenido(valoraciones, planes_feat, features, cliente_id, top_n)
 
-    # Fusión: colaborativo tiene mayor peso (0.7) que contenido (0.3)
+    # Pesos: Red Neuronal 50%, Colaborativo 30%, Contenido 20%
     scores_finales = {}
+    for pid, s in nn:
+        scores_finales[pid] = scores_finales.get(pid, 0) + 0.5 * s
     for pid, s in col:
-        scores_finales[pid] = scores_finales.get(pid, 0) + 0.7 * s
-    for pid, s in con:
         scores_finales[pid] = scores_finales.get(pid, 0) + 0.3 * s
+    for pid, s in con:
+        scores_finales[pid] = scores_finales.get(pid, 0) + 0.2 * s
 
     top_ids = sorted(scores_finales, key=lambda x: -scores_finales[x])[:top_n]
+
+    nn_ids  = {p for p, _ in nn}
+    col_ids = {p for p, _ in col}
 
     resultado = []
     for pid in top_ids:
         info = planes[planes['plan_id'] == pid].iloc[0]
-        fuente = 'colaborativo' if any(p == pid for p, _ in col) else 'contenido'
+        if pid in nn_ids:
+            fuente = 'red_neuronal'
+        elif pid in col_ids:
+            fuente = 'colaborativo'
+        else:
+            fuente = 'contenido'
         resultado.append({
             'plan_id':    int(pid),
             'nombre':     info['nombre'],
             'tipo_sitio': info['tipo_sitio'],
             'score':      round(scores_finales[pid], 4),
-            'fuente':     fuente
+            'fuente':     fuente,
+            'ciudad':     info.get('ciudad', ''),
         })
 
     return resultado
 
 
-# ── 5. EVALUACIÓN DEL MODELO ──────────────────────────────────────────────────
+# ── 6. EVALUACIÓN DEL MODELO ──────────────────────────────────────────────────
 
 def evaluar_modelo(valoraciones, planes):
     """

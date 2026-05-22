@@ -139,6 +139,21 @@ export const HeaderCliente = ({ handleOpenModalPresuento, titulo }) => {
               </svg>
               <span className="hidden md:inline">Mis compras</span>
             </Link>
+
+            <Link
+              to="/recomendaciones-ia"
+              className={`group relative flex items-center gap-2 px-3 py-2 rounded-lg text-sm font-medium transition-all ${
+                isActive("/recomendaciones-ia")
+                  ? "bg-purple-600 text-white shadow-md"
+                  : "text-gray-600 hover:bg-purple-50 hover:text-purple-600"
+              }`}
+              title="Recomendaciones IA"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17H3a2 2 0 01-2-2V5a2 2 0 012-2h14a2 2 0 012 2v10a2 2 0 01-2 2h-2" />
+              </svg>
+              <span className="hidden md:inline">IA</span>
+            </Link>
           </nav>
         )}
       </div>

@@ -13,6 +13,7 @@ import { UsuarioContext } from "./../context/UsuarioContext";
 import { useContext } from "react";
 import { Administrador } from "../pages/Administrador";
 import { PerfilUsuario } from "../pages/PerfilUsuario";
+import { RecomendacionesIA } from "../pages/RecomendacionesIA";
 
 export const AppRouter = () => {
   const { usuarioActivo, isUsuarioActivo } = useContext(UsuarioContext);
@@ -46,6 +47,10 @@ export const AppRouter = () => {
           <Route
             path="/planes-comprados-clientes"
             element={<PlanesComprados />}
+          />
+          <Route
+            path="/recomendaciones-ia"
+            element={<RecomendacionesIA />}
           />
         </>
       )}
