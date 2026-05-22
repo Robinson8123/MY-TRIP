@@ -27,8 +27,8 @@ public class GroqClient {
                       @Value("${groq.api-key}") String apiKey,
                       @Value("${groq.model}") String model) {
         this.restTemplate = builder.build();
-        this.apiKey = apiKey;
-        this.model = model;
+        this.apiKey = apiKey != null ? apiKey.trim() : "";
+        this.model = model != null ? model.trim() : "llama-3.3-70b-versatile";
     }
 
     public String chat(String systemInstructions, String userPrompt) {
