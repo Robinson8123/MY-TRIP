@@ -74,9 +74,12 @@ public class GroqClient {
             
             return message != null ? (String) message.get("content") : "Error: Contenido nulo";
 
+        } catch (org.springframework.web.client.HttpClientErrorException e) {
+            return "Error Groq " + e.getStatusCode() + ": " + e.getResponseBodyAsString();
+        } catch (org.springframework.web.client.HttpServerErrorException e) {
+            return "Error servidor Groq " + e.getStatusCode() + ": " + e.getResponseBodyAsString();
         } catch (org.springframework.web.client.RestClientException e) {
-            // Solución al aviso de multicatch: capturamos excepciones específicas
-            return "Error de red en Groq: " + e.getMessage();
+            return "Error de red Groq: " + e.getMessage();
         } catch (Exception e) {
             return "Error inesperado: " + e.getMessage();
         }
