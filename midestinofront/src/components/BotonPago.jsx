@@ -1,7 +1,6 @@
 import { PropTypes } from "prop-types";
 import { useRef, useState } from "react";
 import toast from "react-hot-toast";
-import { urlGeneral } from "../helpers/apiUrls";
 
 export const BotonPago = ({
     disabled,
@@ -68,8 +67,8 @@ export const BotonPago = ({
                     <input name="currency" type="hidden" value={datosPayU.moneda} />
                     <input name="signature" type="hidden" value={datosPayU.firma} />
                     <input name="test" type="hidden" value="1" /> {/* 1 para Sandbox */}
-                    <input name="responseUrl" type="hidden" value={`${window.location.origin}/pago/resultado`} />
-                    <input name="confirmationUrl" type="hidden" value={`${urlGeneral}/pagos/webhook`} />
+                    <input name="responseUrl" type="hidden" value="http://localhost:5173/pago/resultado" />
+                    <input name="confirmationUrl" type="hidden" value="https://tu-backend.com/api/pagos/webhook" />
                 </form>
             )}
 

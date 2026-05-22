@@ -12,6 +12,26 @@
 
 ---
 
+## INTRODUCCIÓN
+
+Mi Destino es una plataforma digital de turismo inteligente diseñada para facilitar la planificación de viajes dentro del territorio colombiano. Su origen se remonta al VII semestre, cuando el equipo desarrolló "My Trip", una aplicación web que permite a los usuarios registrar su presupuesto y explorar planes turísticos, alojamientos y actividades con precios transparentes.
+
+En el VIII semestre, el proyecto evoluciona significativamente hacia una solución multicanal e inteligente. Se incorporan cuatro grandes componentes técnicos, cada uno vinculado a una asignatura del plan de estudios:
+
+1. **Computación Móvil:** Desarrollo de una aplicación nativa en Flutter para Android, con autenticación, gestión de planes, carrito de compras, chatbot con inteligencia artificial y notificaciones push.
+
+2. **Computación en la Nube:** Despliegue de toda la infraestructura (backend Spring Boot, frontend React, base de datos MySQL y microservicio Python) en la plataforma cloud Railway, garantizando disponibilidad continua y acceso desde cualquier lugar del mundo.
+
+3. **Minería de Datos II:** Implementación de un sistema de recomendación híbrido que combina filtrado colaborativo (similitud coseno entre usuarios) y filtrado basado en contenido (tipo de sitio turístico), con una precisión de MAE = 0.73 sobre datos de prueba.
+
+4. **Ingeniería Económica:** Análisis de viabilidad financiera del proyecto mediante la construcción de un flujo de caja proyectado a tres años, obteniendo un VAN = $50.404.296 COP y una TIR = 75%, confirmando la sostenibilidad económica de la plataforma.
+
+Adicionalmente, el frontend web fue configurado como Progressive Web App (PWA), permitiendo su instalación en cualquier smartphone desde el navegador, sin necesidad de distribución a través de tiendas de aplicaciones.
+
+El presente informe documenta el proceso metodológico completo del VIII semestre, describiendo el problema identificado, el estado del arte, la metodología empleada, los resultados obtenidos y las conclusiones del equipo de desarrollo.
+
+---
+
 ## CAPÍTULO I — CONTEXTUALIZACIÓN Y PROBLEMA
 
 ### 1. Problema
@@ -197,10 +217,39 @@ El proyecto mantiene el paradigma positivista y el enfoque mixto del VII semestr
 
 #### 3.3 Técnicas de Recolección de Información
 
-Las técnicas del VII semestre se mantienen, añadiendo:
-- **Análisis de logs del sistema**: Revisión del comportamiento real de usuarios en la plataforma para alimentar el modelo de recomendación.
-- **Benchmarking técnico**: Comparación de plataformas cloud (Railway, Render, Heroku) para seleccionar la más adecuada por costo/rendimiento.
-- **Análisis de datos históricos**: Uso de las valoraciones registradas en la base de datos como dataset principal para el modelo de minería de datos.
+Para el desarrollo de la investigación en el VIII semestre se emplearon diversas técnicas que permitieron obtener información relevante sobre el funcionamiento del sistema existente y las nuevas necesidades del proyecto.
+
+Se continuó utilizando la **encuesta**, aplicada a usuarios potenciales con el fin de identificar hábitos de uso de aplicaciones móviles para planificación de viajes, así como la disposición a instalar una PWA en sus dispositivos.
+
+También se implementó la **entrevista semiestructurada**, dirigida a usuarios que interactuaron con la versión web del VII semestre, con el propósito de obtener retroalimentación sobre las mejoras esperadas: rapidez, accesibilidad móvil y recomendaciones personalizadas.
+
+Se añadió el **análisis de logs del sistema**, revisando el comportamiento real de usuarios registrados en la plataforma para alimentar el modelo de recomendación y validar los patrones de uso.
+
+Se realizó **benchmarking técnico** comparando plataformas cloud (Railway, Render, Heroku) para seleccionar la más adecuada en función de costo, rendimiento y facilidad de configuración con Docker.
+
+Finalmente, se empleó el **análisis de datos históricos**, utilizando las valoraciones almacenadas en la base de datos (tabla `Valoraciones`) como dataset principal para el entrenamiento y evaluación del modelo de minería de datos.
+
+##### 3.3.1 Técnicas para la Recolección de Información
+
+Los instrumentos utilizados para la recolección de información fueron diseñados con el objetivo de garantizar la validez y confiabilidad de los datos obtenidos en esta fase del proyecto.
+
+Se empleó un **cuestionario digital**, aplicado a través de formularios en línea, compuesto por preguntas cerradas y abiertas orientadas a identificar las preferencias de los usuarios respecto a aplicaciones móviles de turismo, el nivel de satisfacción con la versión web existente y la disposición a utilizar recomendaciones basadas en inteligencia artificial.
+
+También se utilizó una **guía de entrevista estructurada**, que permitió dirigir las preguntas a usuarios de la plataforma de manera organizada, facilitando la obtención de información detallada sobre sus experiencias de uso y expectativas para la versión móvil.
+
+Adicionalmente, se construyó una **matriz de evaluación técnica** para comparar las plataformas cloud consideradas, valorando criterios como disponibilidad, precio, soporte para Docker, variables de entorno y base de datos administrada.
+
+##### 3.3.2 Instrumentos para la Recolección de la Información
+
+Los instrumentos empleados en el VIII semestre fueron los siguientes:
+
+**Cuestionario digital (Google Forms):** Aplicado a 35 usuarios potenciales de la plataforma, incluyendo estudiantes universitarios y turistas que visitan Cartagena. El cuestionario constaba de 12 preguntas cerradas sobre hábitos de uso de aplicaciones móviles para viajes y 3 preguntas abiertas sobre expectativas de personalización.
+
+**Guía de entrevista:** Aplicada a 8 usuarios que utilizaron la versión web del VII semestre, con 10 preguntas estructuradas sobre usabilidad, funcionalidades deseadas y disposición a instalar la aplicación móvil o la PWA.
+
+**Dataset de valoraciones:** Extraído directamente de la base de datos del sistema Mi Destino, conformado por los registros de la tabla `Valoraciones` (clienteId, planEmpresaId, puntuacion, fecha), utilizado exclusivamente para entrenar y evaluar el modelo de recomendación.
+
+**Matriz de benchmarking cloud:** Tabla comparativa de tres plataformas (Railway, Render, Heroku) evaluadas en cinco criterios: costo mensual, soporte Docker, base de datos incluida, red privada entre servicios y tiempo de despliegue promedio.
 
 #### 3.4 Población y Muestra
 
@@ -208,6 +257,22 @@ La población objetivo se amplía del VII semestre para incluir:
 - **Usuarios móviles**: Turistas que planifican viajes exclusivamente desde smartphones (68% del mercado colombiano).
 - **Empresas turísticas**: Operadores de Cartagena que ofrecen planes turísticos en la plataforma.
 - **Dataset del modelo**: Las valoraciones registradas en la base de datos (tabla Valoraciones) conforman el conjunto de datos para entrenamiento y evaluación del modelo de recomendación.
+
+#### 3.5 Cronograma
+
+El cronograma del VIII semestre refleja las fases de desarrollo del proyecto, desde el análisis del sistema existente hasta la documentación final, distribuyendo las actividades a lo largo del semestre.
+
+| Fase | Actividad | Duración | Fecha de inicio | Fecha de cierre |
+|---|---|---|---|---|
+| 1. Análisis del sistema VII | Revisión del sistema existente, identificación de limitaciones y definición de requisitos para el VIII semestre | 1 semana | 02/02/2026 | 08/02/2026 |
+| 2. Diseño de arquitectura | Diseño de arquitectura cloud (Railway), arquitectura móvil (Flutter) y diseño del modelo de recomendación | 2 semanas | 09/02/2026 | 22/02/2026 |
+| 3. Desarrollo app móvil | Implementación de pantallas Flutter: splash, login, home, detalle, carrito, chat, perfil y notificaciones push | 4 semanas | 23/02/2026 | 22/03/2026 |
+| 4. Modelo de recomendación | Preprocesamiento de datos, implementación del algoritmo híbrido, evaluación MAE/RMSE e integración REST | 3 semanas | 23/03/2026 | 12/04/2026 |
+| 5. Despliegue cloud | Configuración Docker, variables de entorno Railway, despliegue de los 3 servicios + MySQL plugin | 1 semana | 13/04/2026 | 19/04/2026 |
+| 6. PWA e integración | Configuración vite-plugin-pwa, manifest, service worker e integración de todos los componentes del monorepo | 1 semana | 20/04/2026 | 26/04/2026 |
+| 7. Análisis económico | Construcción del flujo de caja, cálculo de VAN y TIR, análisis de escenarios | 1 semana | 27/04/2026 | 03/05/2026 |
+| 8. Pruebas y validación | Pruebas de usabilidad en web y móvil, validación del modelo de recomendación, pruebas de carga | 2 semanas | 04/05/2026 | 17/05/2026 |
+| 9. Documentación y entrega | Redacción del informe metodológico VIII semestre, preparación de la presentación final | 1 semana | 18/05/2026 | 20/05/2026 |
 
 ---
 

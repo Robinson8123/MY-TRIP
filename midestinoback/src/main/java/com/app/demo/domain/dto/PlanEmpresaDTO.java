@@ -30,6 +30,4 @@ public class PlanEmpresaDTO {
     private String fechaRegistro;
     private boolean disponible;
     private Long empresaId;
-    private Double lat;
-    private Double lng;
 }

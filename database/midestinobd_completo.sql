@@ -55,7 +55,7 @@ INSERT INTO `empresas` VALUES
  'Cra 2 #5-45, Centro Histórico',
  b'1', b'1', b'1',
  'Cámara de Comercio de Cartagena', NULL, NULL,
- '2010-05-12', '2024-01-15', NULL, NULL, NULL,
+ '2010-05-12', '2024-01-15', NULL, NULL, 0.00,
  '901234567-1', 'Caribe Aventuras SAS',
  'Valentina Herrera', 'Valentina Herrera',
  NULL, '1020304050', '123456789', NULL,
@@ -67,7 +67,7 @@ INSERT INTO `empresas` VALUES
  'Calle 10 #43B-30',
  b'1', b'1', b'1',
  'Cámara de Comercio de Medellín', NULL, NULL,
- '2013-08-19', '2024-02-10', NULL, NULL, NULL,
+ '2013-08-19', '2024-02-10', NULL, NULL, 0.00,
  '901987654-2', 'Andes Trekking Co',
  'Juan Esteban Ríos', 'Juan Esteban Ríos',
  NULL, '1030507090', '234567891', NULL,
@@ -79,7 +79,7 @@ INSERT INTO `empresas` VALUES
  'Carrera 7 #60-45',
  b'1', b'1', b'1',
  'Cámara de Comercio de Bogotá', NULL, NULL,
- '2015-03-22', '2024-03-05', NULL, NULL, NULL,
+ '2015-03-22', '2024-03-05', NULL, NULL, 0.00,
  '900654321-7', 'Sabores Urbanos LTDA',
  'Mariana Torres', 'Mariana Torres',
  NULL, '1012345678', '345678912', NULL,
@@ -91,7 +91,7 @@ INSERT INTO `empresas` VALUES
  'Malecón Bahía de Málaga',
  b'1', b'1', b'1',
  'Cámara de Comercio de Buenaventura', NULL, NULL,
- '2012-11-02', '2024-02-28', NULL, NULL, NULL,
+ '2012-11-02', '2024-02-28', NULL, NULL, 0.00,
  '900112233-4', 'Pacífico Dive Tours',
  'Carlos Mina', 'Carlos Mina',
  NULL, '1045678901', '456789123', NULL,
@@ -103,7 +103,7 @@ INSERT INTO `empresas` VALUES
  'Km 5 Vía Restrepo',
  b'1', b'1', b'1',
  'Cámara de Comercio de Villavicencio', NULL, NULL,
- '2016-06-30', '2024-01-25', NULL, NULL, NULL,
+ '2016-06-30', '2024-01-25', NULL, NULL, 0.00,
  '901556677-8', 'Llanos Eco Travel',
  'José David Barreto', 'José David Barreto',
  NULL, '1056789012', '567891234', NULL,
@@ -161,7 +161,7 @@ INSERT INTO `clientes` VALUES
 --   valoracion_promedio, id_empresa
 -- valoracion_promedio = NULL (se calcula al final)
 -- ============================================================
-INSERT INTO `planes_empresas` VALUES
+INSERT INTO `planes_empresas` (id, cantidad_disponible, ciudad, direccion, disponible, email, fecha_registro, horario, imagen_url, informacion_general, metodo_pago, nombre, personas_disponibles, precio, telefono, tipo_sitio, valoracion_promedio, id_empresa) VALUES
 
 -- === Caribe Aventuras SAS (empresa 1) — Cartagena ===
 (1, 25, 'Cartagena', 'Centro Histórico, Baluarte San Ignacio',
@@ -468,7 +468,7 @@ INSERT INTO `valoraciones` (`comentario`, `fecha`, `puntuacion`, `cliente_id`, `
 --   nombre_plan, personas_disponibles, precio_total_compra,
 --   id_cliente
 -- ============================================================
-INSERT INTO `compra_planes` VALUES
+INSERT INTO `compra_planes` (id_plan_guardado, estado, fecha_compra, nombre_plan, personas_disponibles, precio_total_compra, id_cliente) VALUES
 (1, 'Comprado', '2025-11-10', 'Exploración Murallas de Cartagena',  2,  640000.00, 1),
 (2, 'Comprado', '2025-11-11', 'Isla Barú Day Pass Deluxe',           1,  520000.00, 1),
 (3, 'Comprado', '2025-11-16', 'Caminata Piedra del Peñol 360°',     1,  340000.00, 2),

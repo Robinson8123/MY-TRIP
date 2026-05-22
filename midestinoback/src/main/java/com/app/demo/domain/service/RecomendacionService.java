@@ -97,7 +97,7 @@ public class RecomendacionService {
 
             planRepo.findByTipoSitioIgnoreCaseAndDisponibleTrue(tipoFav).stream()
                     .filter(p -> !yaIncluidos.contains(p.getId()))
-                    .sorted(Comparator.comparingDouble(p ->
+                    .sorted(Comparator.comparingDouble((PlanEmpresa p) ->
                             p.getValoracionPromedio() != null ? -p.getValoracionPromedio() : 0.0))
                     .limit(TOP_N - resultado.size())
                     .forEach(p -> resultado.add(toDTO(p, "contenido",

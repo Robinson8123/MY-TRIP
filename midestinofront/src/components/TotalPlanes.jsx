@@ -1,8 +1,6 @@
 import { formatearAMonedaColombia } from "../helpers/herramientas";
 import { PropTypes } from "prop-types";
 import { useTotalPlanes } from "../hooks";
-import { BotonPago } from "./BotonPago";
-import toast from "react-hot-toast";
 
 export const TotalPlanes = ({
   carritoCompras,
@@ -23,9 +21,6 @@ export const TotalPlanes = ({
     cantidadPersonas,
     setCantidadPersonas,
     comprando,
-    setComprando,
-    obtenerDatosCompraParaPago,
-    solicitarDatosPago,
   } = useTotalPlanes({
     carritoCompras,
     setCarritoCompras,
@@ -112,8 +107,8 @@ export const TotalPlanes = ({
 
         <button
           className={`w-full inline-flex items-center justify-center gap-2 text-white font-semibold rounded-lg text-base px-5 py-3 transition-all hover:shadow-lg disabled:opacity-50 disabled:cursor-not-allowed ${
-            comprando
-              ? 'bg-gray-400 cursor-wait'
+            comprando 
+              ? 'bg-gray-400 cursor-wait' 
               : 'bg-green-600 hover:bg-green-700'
           }`}
           onClick={onComprarPlanes}
@@ -132,25 +127,10 @@ export const TotalPlanes = ({
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M3 3h2l.4 2M7 13h10l4-8H5.4M7 13L5.4 5M7 13l-2.293 2.293c-.63.63-.184 1.707.707 1.707H17m0 0a2 2 0 100 4 2 2 0 000-4zm-8 2a2 2 0 11-4 0 2 2 0 014 0z" />
               </svg>
-              {carritoCompras.length === 0 ? "Carrito vacío" : "Pagar con saldo"}
+              {carritoCompras.length === 0 ? "Carrito vacío" : "Proceder al pago"}
             </>
           )}
         </button>
-
-        <div className="relative flex items-center">
-          <div className="flex-grow border-t border-gray-200"></div>
-          <span className="mx-3 text-xs text-gray-400 font-medium">o paga con tarjeta</span>
-          <div className="flex-grow border-t border-gray-200"></div>
-        </div>
-
-        <BotonPago
-          disabled={carritoCompras.length === 0}
-          comprando={comprando}
-          setComprando={setComprando}
-          obtenerDatosCompraParaPago={obtenerDatosCompraParaPago}
-          solicitarDatosPago={solicitarDatosPago}
-          onPagoFallido={(msg) => toast.error(msg)}
-        />
       </div>
 
       <div className="space-y-4 rounded-lg border border-gray-200 bg-white p-6 shadow-lg">

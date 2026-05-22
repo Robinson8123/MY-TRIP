@@ -3,7 +3,7 @@ class AppConfig {
   // localhost  = desde Windows desktop / Chrome
   static const String baseUrl = String.fromEnvironment(
     'API_URL',
-    defaultValue: 'http://localhost:9999/api',
+    defaultValue: 'https://my-trip-production.up.railway.app/api',
   );
 
   static String get clienteUrl => '$baseUrl/cliente';

@@ -6,7 +6,6 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -30,9 +29,6 @@ import jakarta.transaction.Transactional;
 
 @Service
 public class PlanEmpresaService {
-
-    @Value("${app.base-url:http://localhost:9999}")
-    private String baseUrl;
 
     @Autowired
     private PlanEmpresaRepository planEmpresaRepository;
@@ -66,7 +62,7 @@ public class PlanEmpresaService {
 
             // Crear el PlanEmpresa
             PlanEmpresa planEmpresa = PlanEmpresaMapper.toEntity(dto, empresa);
-            planEmpresa.setImagen(baseUrl + "/api/planes/" + savedImagen.getId() + "/imagen");
+            planEmpresa.setImagen("http://localhost:9999/api/planes/" + savedImagen.getId() + "/imagen");
             PlanEmpresa savedPlan = planEmpresaRepository.save(planEmpresa);
 
             return PlanEmpresaResponse.builder()

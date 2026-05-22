@@ -109,15 +109,13 @@ public class CompraPlanService {
                 if (emp == null) {
                     throw new RuntimeException("Empresa no asociada al plan: " + idPlan);
                 }
-                BigDecimal gananciaActual = emp.getGanancias() != null ? emp.getGanancias() : BigDecimal.ZERO;
-                emp.setGanancias(gananciaActual.add(gananciaNetaEmpresa));
+                emp.setGanancias(emp.getGanancias().add(gananciaNetaEmpresa));
                 empresaRepository.save(emp);
 
                 totalComisionAdmin = totalComisionAdmin.add(comision);
             }
 
-            BigDecimal presupuestoAdmin = admin.getPresupuesto() != null ? admin.getPresupuesto() : BigDecimal.ZERO;
-            admin.setPresupuesto(presupuestoAdmin.add(totalComisionAdmin));
+            admin.setPresupuesto(admin.getPresupuesto().add(totalComisionAdmin));
             clienteRepository.save(admin);
 
             eliminarDelCarritoCompras(cliente.getIdCliente());
@@ -160,15 +158,19 @@ public class CompraPlanService {
                 return new CompraPlanResponse("ID de empresa inválido", false, null, null);
             }
 
-            List<CompraPlan> compras = compraPlanRepository.findByEmpresaIdEmpresa(empresaId);
+            List<CompraPlan> compras = compraPlanRepository.findAll();
 
             if (compras == null || compras.isEmpty()) {
-                return new CompraPlanResponse("No hay ventas para esta empresa", false, null, null);
+                return new CompraPlanResponse("No hay compras registradas", false, null, null);
             }
 
             List<CompraPlanDTO> dtos = compras.stream()
                     .map(CompraPlanMapper::toDTO)
                     .collect(Collectors.toList());
+
+            if (dtos.isEmpty()) {
+                return new CompraPlanResponse("No hay ventas para esta empresa", false, null, null);
+            }
 
             return new CompraPlanResponse("Ventas de la empresa obtenidas", true, null, dtos);
         } catch (Exception e) {

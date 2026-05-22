@@ -1,7 +1,6 @@
 package com.app.demo.domain.service;
 
 import java.math.BigDecimal;
-import java.math.RoundingMode;
 import java.text.NumberFormat;
 import java.util.ArrayList;
 import java.util.Comparator;
@@ -81,7 +80,10 @@ public class TravelChatService {
                         .build();
             }
 
-            List<SuggestedPlanDTO> planesSugeridos = seleccionarMejoresPlanes(planesFiltrados, presupuesto);
+            List<SuggestedPlanDTO> planesSugeridos = planesFiltrados.stream()
+                    .limit(6)
+                    .map(this::mapToSuggestedPlan)
+                    .toList();
 
             String prompt = construirPrompt(
                     request,
@@ -314,36 +316,6 @@ public class TravelChatService {
                 .anyMatch(interes -> tipoSitio.contains(interes) || informacion.contains(interes));
     }
 
-    /**
-     * Selecciona los 3 mejores planes según ajuste al presupuesto y valoración.
-     * Orden: 1) planes que aprovechan mejor el presupuesto (precio más alto dentro del límite),
-     * 2) mayor valoración promedio como desempate.
-     */
-    private List<SuggestedPlanDTO> seleccionarMejoresPlanes(List<PlanEmpresa> planes, BigDecimal presupuesto) {
-        Comparator<BigDecimal> precioOrder = presupuesto != null
-                ? Comparator.<BigDecimal>reverseOrder()
-                : Comparator.<BigDecimal>naturalOrder();
-        return planes.stream()
-                .sorted(Comparator
-                        .comparing(PlanEmpresa::getPrecio, Comparator.nullsLast(precioOrder))
-                        .thenComparing(p -> p.getValoracionPromedio() != null ? p.getValoracionPromedio() : 0.0,
-                                Comparator.reverseOrder()))
-                .limit(3)
-                .map(this::mapToSuggestedPlan)
-                .toList();
-    }
-
-    private String clasificarPlan(SuggestedPlanDTO plan, BigDecimal presupuesto) {
-        if (presupuesto == null || plan.getPrecio() == null) {
-            return "DISPONIBLE";
-        }
-        BigDecimal precio = plan.getPrecio();
-        BigDecimal uso = precio.multiply(BigDecimal.valueOf(100)).divide(presupuesto, 0, RoundingMode.HALF_UP);
-        if (uso.intValue() >= 80) return "EXCELENTE AJUSTE AL PRESUPUESTO";
-        if (uso.intValue() >= 50) return "BUEN AJUSTE AL PRESUPUESTO";
-        return "AJUSTE BÁSICO AL PRESUPUESTO";
-    }
-
     private SuggestedPlanDTO mapToSuggestedPlan(PlanEmpresa plan) {
         List<String> comentarios = valoracionPlanRepository.findByPlanEmpresaId(plan.getId())
                 .stream()
@@ -409,12 +381,10 @@ public class TravelChatService {
                             .append('\n'));
         }
 
-        prompt.append('\n').append("TOP 3 PLANES RECOMENDADOS (seleccionados por mejor ajuste al presupuesto y valoración):\n");
+        prompt.append('\n').append("PLANES DISPONIBLES (información real de la base de datos):\n");
         for (int i = 0; i < planes.size(); i++) {
             SuggestedPlanDTO plan = planes.get(i);
-            String clasificacion = clasificarPlan(plan, presupuesto);
-            prompt.append(i + 1).append(". [").append(clasificacion).append("] ")
-                    .append(defaultString(plan.getNombrePlan())).append('\n');
+            prompt.append(i + 1).append(". Nombre: ").append(defaultString(plan.getNombrePlan())).append('\n');
             prompt.append("   - Tipo: ").append(defaultString(plan.getTipoSitio())).append('\n');
             prompt.append("   - Dirección: ").append(defaultString(plan.getDireccion())).append('\n');
             prompt.append("   - Ciudad del plan: ")
@@ -449,22 +419,19 @@ public class TravelChatService {
 
         prompt.append("INSTRUCCIONES DE RESPUESTA:\n" +
                 "1. Responde siempre en español neutro y con tono cercano.\n" +
-                "2. MINERÍA DE DATOS: Los planes ya fueron clasificados y ordenados por ajuste al presupuesto. Destaca cuál es el MEJOR, el SEGUNDO MEJOR y el TERCER MEJOR para el usuario, explicando por qué cada uno es una buena opción según su dinero disponible.\n"
+                "2. Empieza con un resumen del viaje propuesto en uno o dos párrafos.\n" +
+                "3. Crea un itinerario día por día acorde a la duración indicada (si no se indica, propone 3 días) incluyendo horarios aproximados y justificando por qué cada actividad encaja con los gustos o intereses.\n"
                 +
-                "3. Empieza con un resumen del viaje propuesto en uno o dos párrafos mencionando los 3 planes recomendados.\n"
+                "4. Incluye sugerencias complementarias: restaurantes o playas cercanas, opciones de transporte local, consejos de horarios, costos aproximados y requisitos (reservas, documentos, etc.). Usa siempre los datos de los planes para estimar costos.\n"
                 +
-                "4. Crea un itinerario día por día acorde a la duración indicada (si no se indica, propone 3 días) incluyendo horarios aproximados y justificando por qué cada actividad encaja con los gustos o intereses.\n"
+                "5. Si los planes pertenecen a ciudades diferentes, aclara explícitamente la ciudad a la que corresponde cada actividad.\n"
                 +
-                "5. Incluye sugerencias complementarias: restaurantes o playas cercanas, opciones de transporte local, consejos de horarios, costos aproximados y requisitos (reservas, documentos, etc.). Usa siempre los datos de los planes para estimar costos.\n"
+                "6. Si el usuario hace preguntas específicas, respóndelas directamente usando los datos anteriores.\n" +
+                "7. Cierra con próximos pasos claros (por ejemplo, reservar un plan concreto, confirmar medios de pago, etc.).\n"
                 +
-                "6. Si los planes pertenecen a ciudades diferentes, aclara explícitamente la ciudad a la que corresponde cada actividad.\n"
+                "8. Si la información disponible no es suficiente para responder algún punto, acláralo y propone alternativas realistas usando únicamente la información disponible.\n"
                 +
-                "7. Si el usuario hace preguntas específicas, respóndelas directamente usando los datos anteriores.\n" +
-                "8. Cierra con próximos pasos claros (por ejemplo, reservar un plan concreto, confirmar medios de pago, etc.).\n"
-                +
-                "9. Si la información disponible no es suficiente para responder algún punto, acláralo y propone alternativas realistas usando únicamente la información disponible.\n"
-                +
-                "10. No inventes nombres ni datos que no estén listados en 'TOP 3 PLANES RECOMENDADOS'.\n");
+                "9. No inventes nombres ni datos que no estén listados en 'PLANES DISPONIBLES'.\n");
 
         prompt.append('\n').append(
                 "Genera ahora la respuesta para el usuario teniendo en cuenta su mensaje y los datos reales proporcionados.");

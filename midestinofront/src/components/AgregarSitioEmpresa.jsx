@@ -280,43 +280,6 @@ export const AgregarSitioEmpresa = ({
                 />
               </div>
 
-              <div className="grid grid-cols-2 gap-3">
-                <div className="mb-5">
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
-                    Latitud
-                  </label>
-                  <input
-                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    type="number"
-                    step="any"
-                    name="lat"
-                    placeholder="Ej: 10.3910"
-                    value={formState.lat}
-                    onChange={onInputChange}
-                  />
-                </div>
-                <div className="mb-5">
-                  <label className="block mb-2 text-sm font-medium text-gray-900">
-                    Longitud
-                  </label>
-                  <input
-                    className="shadow-sm bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5"
-                    type="number"
-                    step="any"
-                    name="lng"
-                    placeholder="Ej: -75.4794"
-                    value={formState.lng}
-                    onChange={onInputChange}
-                  />
-                </div>
-              </div>
-              <p className="text-xs text-gray-500 -mt-3 mb-5 flex items-center gap-1">
-                <svg className="w-3.5 h-3.5 text-blue-400" fill="currentColor" viewBox="0 0 20 20">
-                  <path fillRule="evenodd" d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z" clipRule="evenodd"/>
-                </svg>
-                Opcional. Busca las coordenadas en Google Maps haciendo clic derecho sobre el lugar.
-              </p>
-
               <button
                 type="submit"
                 disabled={enviando}

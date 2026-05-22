@@ -7,7 +7,6 @@ import { borrar, comprar, editar, notfound } from "../images";
 import { urlGeneral } from "./../helpers/apiUrls";
 import { AgregarSitioEmpresa } from "./AgregarSitioEmpresa";
 import { ModalResenas } from "./ModalResenas";
-import { MapaDestino } from "./MapaDestino";
 import { useTarjetaPlanes } from "../hooks";
 
 export const TarjetaPlanes = ({
@@ -109,16 +108,6 @@ export const TarjetaPlanes = ({
                 className="w-full h-full object-cover"
               />
             </div>
-            <div className="px-4 pt-4">
-              <MapaDestino
-                lat={planEmpresa.lat}
-                lng={planEmpresa.lng}
-                nombre={planEmpresa.nombre}
-                direccion={planEmpresa.direccion}
-                precio={planEmpresa.precio}
-              />
-            </div>
-
             <div className="p-6">
               <h4 className="block font-sans text-2xl antialiased font-semibold leading-snug tracking-normal text-blue-gray-900 mb-2">
                 {planEmpresa.nombre}
@@ -225,60 +214,33 @@ export const TarjetaPlanes = ({
                   </div>
                 )}
 
-                {usuarioActivo.tipoUsuario === "Cliente" && planEmpresa.cantidadDisponible > 0 && (() => {
-                  const presupuestoInsuficiente =
-                    usuarioActivo.presupuesto != null &&
-                    Number(planEmpresa.precio) > Number(usuarioActivo.presupuesto);
-
-                  if (presupuestoInsuficiente) {
-                    return (
-                      <div className="flex flex-col items-end gap-1">
-                        <button
-                          disabled
-                          className="flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium bg-gray-200 text-gray-400 cursor-not-allowed"
-                          title="Presupuesto insuficiente"
-                        >
-                          <img className="w-4 h-4 opacity-40" src={comprar} alt="comprar" />
-                          <span className="text-xs">Agregar</span>
-                        </button>
-                        <span className="text-xs text-red-500 font-medium flex items-center gap-1">
-                          <svg className="w-3 h-3" fill="currentColor" viewBox="0 0 20 20">
-                            <path fillRule="evenodd" d="M8.257 3.099c.765-1.36 2.722-1.36 3.486 0l5.58 9.92c.75 1.334-.213 2.98-1.742 2.98H4.42c-1.53 0-2.493-1.646-1.743-2.98l5.58-9.92zM11 13a1 1 0 11-2 0 1 1 0 012 0zm-1-8a1 1 0 00-1 1v3a1 1 0 002 0V6a1 1 0 00-1-1z" clipRule="evenodd" />
-                          </svg>
-                          Presupuesto insuficiente
-                        </span>
-                      </div>
-                    );
-                  }
-
-                  return (
-                    <button
-                      onClick={agregarCarritoCompras}
-                      disabled={agregandoCarrito}
-                      className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
-                        agregandoCarrito
-                          ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                          : 'bg-green-600 text-white hover:bg-green-700 hover:shadow-md transform hover:scale-105'
-                      }`}
-                      title="Agregar al carrito"
-                    >
-                      {agregandoCarrito ? (
-                        <>
-                          <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                            <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
-                            <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
-                          </svg>
-                          <span className="text-xs">Agregando...</span>
-                        </>
-                      ) : (
-                        <>
-                          <img className="w-4 h-4" src={comprar} alt="comprar" />
-                          <span className="text-xs">Agregar</span>
-                        </>
-                      )}
-                    </button>
-                  );
-                })()}
+                {usuarioActivo.tipoUsuario === "Cliente" && planEmpresa.cantidadDisponible > 0 && (
+                  <button 
+                    onClick={agregarCarritoCompras}
+                    disabled={agregandoCarrito}
+                    className={`flex items-center gap-1.5 px-3 py-1.5 rounded-md text-sm font-medium transition-all ${
+                      agregandoCarrito 
+                        ? 'bg-gray-300 text-gray-500 cursor-not-allowed' 
+                        : 'bg-green-600 text-white hover:bg-green-700 hover:shadow-md transform hover:scale-105'
+                    }`}
+                    title="Agregar al carrito"
+                  >
+                    {agregandoCarrito ? (
+                      <>
+                        <svg className="animate-spin h-4 w-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                        </svg>
+                        <span className="text-xs">Agregando...</span>
+                      </>
+                    ) : (
+                      <>
+                        <img className="w-4 h-4" src={comprar} alt="comprar" />
+                        <span className="text-xs">Agregar</span>
+                      </>
+                    )}
+                  </button>
+                )}
 
                 {usuarioActivo.tipoUsuario === "Cliente" && planEmpresa.cantidadDisponible <= 0 && (
                   <span className="px-4 py-2 bg-gray-200 text-gray-600 rounded-lg font-medium">

@@ -27,8 +27,6 @@ public class PlanEmpresaMapper {
                 .metodosPagoAceptados(dto.getMetodosPagoAceptados())
                 .disponible(dto.isDisponible())
                 .fechaRegistro(dto.getFechaRegistro())
-                .lat(dto.getLat())
-                .lng(dto.getLng())
                 .empresa(empresa)
                 .build();
     }
@@ -53,8 +51,6 @@ public class PlanEmpresaMapper {
                 .fechaRegistro(entity.getFechaRegistro())
                 .disponible(entity.isDisponible())
                 .empresaId(entity.getEmpresa().getIdEmpresa())
-                .lat(entity.getLat())
-                .lng(entity.getLng())
                 .build();
     }
 }

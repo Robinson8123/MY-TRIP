@@ -13,7 +13,6 @@ import { UsuarioContext } from "./../context/UsuarioContext";
 import { useContext } from "react";
 import { Administrador } from "../pages/Administrador";
 import { PerfilUsuario } from "../pages/PerfilUsuario";
-import { PagoResultado } from "../pages/PagoResultado";
 
 export const AppRouter = () => {
   const { usuarioActivo, isUsuarioActivo } = useContext(UsuarioContext);
@@ -52,7 +51,6 @@ export const AppRouter = () => {
       )}
 
       <Route path="/perfil/:id" element={<PerfilUsuario />} />
-      <Route path="/pago/resultado" element={<PagoResultado />} />
 
       {usuarioActivo.tipoUsuario === "Empresa" && (
         <>

@@ -27,3 +27,8 @@ server.log
 # Archivos generados / análisis
 repomix-output.xml
 audit.json
+
+# Python
+__pycache__/
+*.pyc
+*.pyo

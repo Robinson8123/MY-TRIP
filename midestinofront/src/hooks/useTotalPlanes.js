@@ -128,61 +128,6 @@ export const useTotalPlanes = ({
     }
   };
 
-  const buildDatosCompra = () => ({
-    nombrePlan: nombrePlan.trim(),
-    estado: "Comprado",
-    precioTotalCompra: Number(precioFinal),
-    personasDisponibles: Number(cantidadPersonas),
-    fechaCompra: new Date().toISOString().split("T")[0],
-    nombrePlanes: carritoCompras.map((c) => c.planEmpresa.nombre || ""),
-    tipoSitios: carritoCompras.map((c) => c.planEmpresa.tipoSitio || ""),
-    direcciones: carritoCompras.map((c) => c.planEmpresa.direccion || ""),
-    horarios: carritoCompras.map((c) => c.planEmpresa.horario || ""),
-    correos: carritoCompras.map((c) => c.planEmpresa.email || ""),
-    ciudades: carritoCompras.map((c) => c.planEmpresa.ciudad || ""),
-    imagenes: carritoCompras.map((c) => c.planEmpresa.imagen_url || ""),
-    informacionesGenerales: carritoCompras.map((c) => c.planEmpresa.informacionGeneral || ""),
-    cantidadesCompradas: carritoCompras.map((c) => String(c.cantidad)),
-    telefonos: carritoCompras.map((c) => Number(c.planEmpresa.telefono) || 0),
-    empresas: carritoCompras.map((c) => Number(c.planEmpresa.empresaId)),
-    planesPorEmpresa: carritoCompras.map((c) => Number(c.planEmpresa.id)),
-    precios: carritoCompras.map((c) => Number(c.precioTotal)),
-    cliente: { idCliente: Number(usuarioActivo.idCliente) },
-  });
-
-  const obtenerDatosCompraParaPago = () => {
-    if (carritoCompras.length === 0) {
-      toast.error("❌ Tu carrito está vacío.");
-      return null;
-    }
-    if (!nombrePlan || nombrePlan.trim().length < 5) {
-      toast.error("📝 Ingresa un nombre para tu plan (mínimo 5 caracteres).");
-      return null;
-    }
-    if (presupuestoEsSuficiente) {
-      toast.error("💰 Presupuesto insuficiente.");
-      return null;
-    }
-    return { monto: precioFinal, moneda: "COP" };
-  };
-
-  const solicitarDatosPago = async (datosCompra) => {
-    const firmaResponse = await axios.post(`${urlGeneral}/pagos/firma`, {
-      monto: datosCompra.monto,
-      moneda: datosCompra.moneda,
-    });
-
-    const data = firmaResponse.data;
-    if (data.valid && data.pagoDatos?.referencia) {
-      const pendingPurchase = buildDatosCompra();
-      sessionStorage.setItem(
-        `pendingPurchase_${data.pagoDatos.referencia}`,
-        JSON.stringify(pendingPurchase)
-      );
-    }
-    return data;
-  };
-
   return {
     precioFinal,
     onComprarPlanes,
@@ -196,8 +141,5 @@ export const useTotalPlanes = ({
     cantidadPersonas,
     setCantidadPersonas,
     comprando,
-    setComprando,
-    obtenerDatosCompraParaPago,
-    solicitarDatosPago,
   };
 }; // Aquí se cierra el hook correctamente

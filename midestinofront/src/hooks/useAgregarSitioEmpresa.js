@@ -28,8 +28,6 @@ export const useAgregarSitioEmpresa = ({
     personasDisponibles: editData ? editData.personasDisponibles : "",
     informacionGeneral: editData ? editData.informacionGeneral : "",
     valoracionPromedio: editData ? editData.valoracionPromedio : 0,
-    lat: editData ? (editData.lat ?? "") : "",
-    lng: editData ? (editData.lng ?? "") : "",
   });
 
   const validateForm = () => {
@@ -144,8 +142,6 @@ export const useAgregarSitioEmpresa = ({
       personasDisponibles: formState.personasDisponibles,
       empresaId,
       fechaRegistro: formatearFecha(),
-      lat: formState.lat !== "" ? Number(formState.lat) : null,
-      lng: formState.lng !== "" ? Number(formState.lng) : null,
     };
 
     if (editData) {
@@ -173,8 +169,6 @@ export const useAgregarSitioEmpresa = ({
             cantidadDisponible: formState.cantidad,
             personasDisponibles: formState.personasDisponibles,
             informacionGeneral: formState.informacionGeneral,
-            lat: formState.lat !== "" ? Number(formState.lat) : null,
-            lng: formState.lng !== "" ? Number(formState.lng) : null,
           })
         : await axios.post(`${urlGeneral}/planes/agregar`, formData, {
             headers: { "Content-Type": "multipart/form-data" },

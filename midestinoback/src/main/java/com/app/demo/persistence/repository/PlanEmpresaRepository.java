@@ -23,8 +23,4 @@ public interface PlanEmpresaRepository extends JpaRepository<PlanEmpresa, Long> 
     Optional<PlanEmpresa> findByNombre(String nombre);
 
     boolean existsByNombre(String nombre);
-
-    List<PlanEmpresa> findByDisponibleTrue();
-
-    List<PlanEmpresa> findByTipoSitioIgnoreCaseAndDisponibleTrue(String tipoSitio);
 }

@@ -67,12 +67,6 @@ public class PlanEmpresa {
     @Column(nullable = false)
     private boolean disponible;
 
-    @Column
-    private Double lat;
-
-    @Column
-    private Double lng;
-
     @ManyToOne
     @JoinColumn(name = "id_empresa")
     private Empresa empresa;
