@@ -43,8 +43,8 @@ export const ClientePagina = () => {
   return (
     <TemplateMainCliente titulo="Planes">
       <section>
-        <div className="flex justify-end gap-2">
-          <div>
+        <div className="flex flex-col sm:flex-row justify-end gap-2">
+          <div className="w-full sm:w-auto">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Nombre
             </label>
@@ -52,18 +52,18 @@ export const ClientePagina = () => {
               type="text"
               value={nombreFiltro}
               onChange={(e) => setNombreFiltro(e.target.value)}
-              className="w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+              className="w-full sm:w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
               placeholder="Nombre del plan"
             />
           </div>
-          <div>
+          <div className="w-full sm:w-auto">
             <label className="block mb-2 text-sm font-medium text-gray-900">
               Ciudad
             </label>
             <select
               value={ciudadFiltro}
               onChange={(e) => setCiudadFiltro(e.target.value)}
-              className="w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
+              className="w-full sm:w-64 bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block p-2.5"
             >
               <option value="">Seleccione una ciudad</option>
               <option value="Cartagena">Cartagena</option>

@@ -5,9 +5,9 @@ plugins {
 }
 
 // Hardcoded to prevent Flutter's auto-migration from replacing with lazy Providers
-val appMinSdk = 21
-val appTargetSdk = 36
-val appCompileSdk = 36
+val appMinSdk = 23
+val appTargetSdk = 35
+val appCompileSdk = 35
 
 android {
     namespace = "com.midestino.app"

@@ -33,12 +33,12 @@ export const AnonimoPagina = () => {
         />
       </figure>
 
-      <section className="relative flex flex-col items-start justify-center h-screen pl-40">
-        <div className="w-[40%] px-8 shadow-xl rounded-lg">
-          <h1 className="text-7xl m-0 mb-6 font-extrabold text-white leading-tight">
+      <section className="relative flex flex-col items-start justify-center min-h-screen px-6 md:pl-40">
+        <div className="w-full md:w-[40%] px-4 md:px-8 shadow-xl rounded-lg">
+          <h1 className="text-4xl sm:text-5xl md:text-7xl m-0 mb-6 font-extrabold text-white leading-tight">
             Bienvenido a <span className="text-blue-400">My Trip</span>
           </h1>
-          <p className="pt-6 text-xl font-medium text-gray-200">
+          <p className="pt-4 text-base md:text-xl font-medium text-gray-200">
             <span className="text-white">Descubre</span> la forma más fácil de
             planificar tus vacaciones soñadas. Desde destinos exóticos hasta
             escapadas locales, en My Trip te ayudamos a organizar cada detalle
