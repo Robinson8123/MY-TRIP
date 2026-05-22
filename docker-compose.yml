@@ -1,0 +1,55 @@
+services:
+
+  # ─── Base de datos ────────────────────────────────────────────
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_PASSWORD:-root}
+      MYSQL_DATABASE: midestinobd
+    ports:
+      - "3306:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-p${MYSQL_PASSWORD:-root}"]
+      interval: 10s
+      timeout: 5s
+      retries: 12
+
+  # ─── Backend Spring Boot ──────────────────────────────────────
+  backend:
+    build:
+      context: ./midestinoback
+    restart: unless-stopped
+    environment:
+      PORT: 9999
+      MYSQL_URL: jdbc:mysql://mysql:3306/midestinobd?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC
+      MYSQL_USER: ${MYSQL_USER:-root}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-root}
+      APP_BASE_URL: ${APP_BASE_URL:-http://localhost}
+      GROQ_API_KEY: ${GROQ_API_KEY}
+      GROQ_MODEL: ${GROQ_MODEL:-llama-3.3-70b-versatile}
+      PAYU_API_KEY: ${PAYU_API_KEY:-4Vj8eK4rloUd272L48hsrarnUA}
+      PAYU_MERCHANT_ID: ${PAYU_MERCHANT_ID:-508029}
+      PAYU_ACCOUNT_ID: ${PAYU_ACCOUNT_ID:-512321}
+    depends_on:
+      mysql:
+        condition: service_healthy
+    expose:
+      - "9999"
+
+  # ─── Frontend React + Nginx ───────────────────────────────────
+  frontend:
+    build:
+      context: ./midestinofront
+      args:
+        VITE_API_URL: /api
+    restart: unless-stopped
+    ports:
+      - "80:80"
+    depends_on:
+      - backend
+
+volumes:
+  mysql_data:

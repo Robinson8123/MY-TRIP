@@ -1,0 +1,67 @@
+{
+  "$schema": "https://railway.app/railway.schema.json",
+  "services": [
+    {
+      "name": "mytrip-backend",
+      "source": {
+        "rootDir": "midestinoback"
+      },
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 5
+      },
+      "variables": {
+        "PORT": "9999",
+        "SPRING_PROFILES_ACTIVE": "prod",
+        "MYSQL_URL": "jdbc:mysql://${{MySQL.MYSQLHOST}}:${{MySQL.MYSQLPORT}}/${{MySQL.MYSQLDATABASE}}?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC",
+        "MYSQL_USER": "${{MySQL.MYSQLUSER}}",
+        "MYSQL_PASSWORD": "${{MySQL.MYSQLPASSWORD}}",
+        "APP_BASE_URL": "https://${{RAILWAY_PUBLIC_DOMAIN}}",
+        "GROQ_MODEL": "llama-3.3-70b-versatile",
+        "PAYU_API_KEY": "4Vj8eK4rloUd272L48hsrarnUA",
+        "PAYU_MERCHANT_ID": "508029",
+        "PAYU_ACCOUNT_ID": "512321"
+      }
+    },
+    {
+      "name": "mytrip-frontend",
+      "source": {
+        "rootDir": "midestinofront"
+      },
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 5
+      },
+      "variables": {
+        "PORT": "80",
+        "BACKEND_URL": "http://mytrip-backend.railway.internal:9999"
+      }
+    },
+    {
+      "name": "mytrip-mineria",
+      "source": {
+        "rootDir": "mineria"
+      },
+      "build": {
+        "builder": "DOCKERFILE",
+        "dockerfilePath": "Dockerfile"
+      },
+      "deploy": {
+        "restartPolicyType": "ON_FAILURE",
+        "restartPolicyMaxRetries": 5
+      },
+      "variables": {
+        "PORT": "8000",
+        "MYSQL_URL_PYTHON": "mysql+pymysql://${{MySQL.MYSQLUSER}}:${{MySQL.MYSQLPASSWORD}}@${{MySQL.MYSQLHOST}}:${{MySQL.MYSQLPORT}}/${{MySQL.MYSQLDATABASE}}"
+      }
+    }
+  ]
+}

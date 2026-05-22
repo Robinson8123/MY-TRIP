@@ -1,0 +1,36 @@
+name: midestino_movil
+description: Mi Destino - Aplicación móvil de turismo inteligente con IA
+version: 1.0.0+1
+
+environment:
+  sdk: '>=3.2.0 <4.0.0'
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # HTTP
+  http: ^1.2.1
+
+  # Estado
+  provider: ^6.1.2
+
+  # Sesión local
+  shared_preferences: ^2.3.2
+
+  # Notificaciones push locales
+  flutter_local_notifications: ^17.2.3
+
+  # Iconos
+  cupertino_icons: ^1.0.8
+
+  # Rating / estrellas
+  flutter_rating_bar: ^4.0.1
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

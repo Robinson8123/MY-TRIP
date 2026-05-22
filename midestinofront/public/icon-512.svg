@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">
+  <rect width="512" height="512" rx="80" fill="#006E7F"/>
+  <path d="M256 120 C207 120 168 159 168 208 C168 275 256 370 256 370 C256 370 344 275 344 208 C344 159 305 120 256 120Z" fill="white"/>
+  <circle cx="256" cy="208" r="42" fill="#006E7F"/>
+  <circle cx="256" cy="208" r="18" fill="white"/>
+  <path d="M150 400 Q256 368 362 400" stroke="white" stroke-width="10" fill="none" stroke-linecap="round"/>
+  <text x="256" y="460" font-family="Arial,sans-serif" font-size="40" font-weight="bold" fill="white" text-anchor="middle">MI DESTINO</text>
+</svg>

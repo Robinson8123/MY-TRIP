@@ -1,0 +1,29 @@
+# Variables de entorno con credenciales
+.env
+.env.*
+!.env.example
+
+# Carpetas de build
+target/
+dist/
+build/
+
+# IDE
+.idea/
+.vscode/
+*.iml
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+server.log
+
+# Claude Code internal
+.claude/
+
+# Archivos generados / análisis
+repomix-output.xml
+audit.json
