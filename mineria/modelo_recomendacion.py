@@ -18,23 +18,34 @@ from sklearn.metrics import mean_absolute_error, mean_squared_error
 # ── 1. CARGA Y PREPARACIÓN DE DATOS ──────────────────────────────────────────
 
 def cargar_datos_demo():
-    """Dataset sintético basado en la estructura real de la BD Mi Destino."""
-    valoraciones = pd.DataFrame({
-        'cliente_id': [1,1,1,2,2,3,3,3,4,4,4,5,5,6,6,7,7,8,8,9,9,10],
-        'plan_id':    [1,2,3,1,4,2,3,5,1,3,6,4,5,2,6,3,7,1,8,5,9,10],
-        'puntuacion': [5,4,3,4,5,5,4,3,3,5,4,4,5,3,4,5,4,4,3,5,4, 5]
-    })
+    """Carga dataset real del proyecto Mi Destino desde archivos CSV."""
+    import os
+    base_dir = os.path.dirname(os.path.abspath(__file__))
+    val_path  = os.path.join(base_dir, "dataset", "valoraciones.csv")
+    plan_path = os.path.join(base_dir, "dataset", "planes.csv")
 
+    if os.path.exists(val_path) and os.path.exists(plan_path):
+        valoraciones = pd.read_csv(val_path)[['cliente_id', 'plan_id', 'puntuacion']]
+        planes = pd.read_csv(plan_path).rename(columns={'valoracion_prom': 'valoracion_prom'})
+        return valoraciones, planes
+
+    # Fallback mínimo si los CSV no están disponibles
+    valoraciones = pd.DataFrame({
+        'cliente_id': [1,1,2,2,3,3,4,4,5,5],
+        'plan_id':    [1,3,1,6,3,19,7,15,13,17],
+        'puntuacion': [5,5,4,5,5,5,4,5,5,5]
+    })
     planes = pd.DataFrame({
-        'plan_id':          list(range(1, 11)),
-        'nombre':           ['Tour Histórico','Playa Privada','Senderismo Sierra Nevada',
-                             'Gastronomía Local','Avistamiento de Aves','Buceo Islas del Rosario',
-                             'Cartagena de Noche','Mercado Artesanal','Kayak Bocagrande','Ciclismo Rural'],
-        'tipo_sitio':       ['Cultural','Playa','Naturaleza','Gastronomía','Naturaleza',
-                             'Acuático','Cultural','Cultural','Acuático','Naturaleza'],
-        'precio':           [80000,150000,60000,45000,55000,200000,70000,30000,90000,40000],
-        'valoracion_prom':  [4.8,4.5,4.2,4.6,4.0,4.9,4.3,3.8,4.1,4.4],
-        'ciudad':           ['Cartagena']*10
+        'plan_id':         [1,3,6,7,13,15,17,19],
+        'nombre':          ['Murallas Cartagena','Snorkel Rosario','Isla Barú',
+                            'Piedra del Peñol','Street Food','Arte Urbano',
+                            'Taller Ceviche','Buceo Ballenas'],
+        'tipo_sitio':      ['Cultural','Aventura','Relax','Aventura',
+                            'Gastronómico','Cultural','Gastronómico','Aventura'],
+        'precio':          [320000,450000,520000,340000,220000,180000,280000,620000],
+        'valoracion_prom': [4.7,4.8,4.9,4.7,4.5,4.6,4.7,4.9],
+        'ciudad':          ['Cartagena','Cartagena','Cartagena','Medellín',
+                            'Bogotá','Bogotá','Bogotá','Buenaventura']
     })
     return valoraciones, planes
 

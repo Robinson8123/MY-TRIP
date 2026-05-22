@@ -1,0 +1,76 @@
+cliente_id,plan_id,puntuacion,nombre_cliente,nombre_plan
+1,1,5,Laura González,Exploración Murallas de Cartagena
+1,2,4,Laura González,Chiva Rumbera Sunset
+1,3,5,Laura González,Snorkel en Islas del Rosario
+1,4,3,Laura González,Tour Gastronómico Caribe Fusión
+1,6,5,Laura González,Isla Barú Day Pass Deluxe
+2,1,4,Sebastián López,Exploración Murallas de Cartagena
+2,5,5,Sebastián López,Kayak Nocturno en la Ciénaga
+2,7,4,Sebastián López,Caminata Piedra del Peñol 360°
+2,9,5,Sebastián López,Parapente San Félix Pro
+2,10,4,Sebastián López,Cañoning Cascada Cristal
+3,3,5,Valeria Castillo,Snorkel en Islas del Rosario
+3,6,5,Valeria Castillo,Isla Barú Day Pass Deluxe
+3,19,5,Valeria Castillo,Buceo Avistamiento de Ballenas
+3,20,4,Valeria Castillo,Snorkel Manglares La Barra
+3,28,5,Valeria Castillo,Glamping Estrellas del Llano
+4,7,4,Andrés Martínez,Caminata Piedra del Peñol 360°
+4,8,3,Andrés Martínez,Ruta Café y Aventura
+4,11,4,Andrés Martínez,Tour Pueblos Patrimonio
+4,15,5,Andrés Martínez,Arte Urbano Chapinero
+4,27,4,Andrés Martínez,Ruta del Cacao Experiencial
+5,13,5,Camila Ortiz,Street Food La Candelaria
+5,14,4,Camila Ortiz,Experiencia Cervecera Artesanal
+5,17,5,Camila Ortiz,Taller Ceviche Nikkei
+5,18,3,Camila Ortiz,Brunch Fusión Dominguero
+5,24,4,Camila Ortiz,Tour Gastronómico Pacífico
+6,1,4,Carlos Pérez,Exploración Murallas de Cartagena
+6,3,5,Carlos Pérez,Snorkel en Islas del Rosario
+6,4,4,Carlos Pérez,Tour Gastronómico Caribe Fusión
+6,19,5,Carlos Pérez,Buceo Avistamiento de Ballenas
+6,21,4,Carlos Pérez,Kayak Bahía de Málaga
+7,7,5,María Rodríguez,Caminata Piedra del Peñol 360°
+7,9,5,María Rodríguez,Parapente San Félix Pro
+7,10,4,María Rodríguez,Cañoning Cascada Cristal
+7,12,3,María Rodríguez,Senderismo Nocturno Arví
+7,25,5,María Rodríguez,Safari Llanero Sunrise
+8,2,4,Jorge Hernández,Chiva Rumbera Sunset
+8,4,5,Jorge Hernández,Tour Gastronómico Caribe Fusión
+8,13,5,Jorge Hernández,Street Food La Candelaria
+8,16,4,Jorge Hernández,Picnic Gourmet Simón Bolívar
+8,30,4,Jorge Hernández,Parrando Llanero Tradicional
+9,6,5,Ana Vargas,Isla Barú Day Pass Deluxe
+9,16,4,Ana Vargas,Picnic Gourmet Simón Bolívar
+9,28,5,Ana Vargas,Glamping Estrellas del Llano
+9,20,4,Ana Vargas,Snorkel Manglares La Barra
+9,22,3,Ana Vargas,Expedición Cascadas Agua Clara
+10,25,5,Luis Torres,Safari Llanero Sunrise
+10,26,4,Luis Torres,Cabalgata Río Meta
+10,29,4,Luis Torres,Avistamiento Aves Humedales
+10,30,5,Luis Torres,Parrando Llanero Tradicional
+10,8,3,Luis Torres,Ruta Café y Aventura
+11,1,5,Diana Moreno,Exploración Murallas de Cartagena
+11,15,5,Diana Moreno,Arte Urbano Chapinero
+11,23,4,Diana Moreno,Pesca Artesanal Comunitaria
+11,27,4,Diana Moreno,Ruta del Cacao Experiencial
+11,30,5,Diana Moreno,Parrando Llanero Tradicional
+12,3,4,Felipe Castro,Snorkel en Islas del Rosario
+12,5,5,Felipe Castro,Kayak Nocturno en la Ciénaga
+12,19,5,Felipe Castro,Buceo Avistamiento de Ballenas
+12,21,4,Felipe Castro,Kayak Bahía de Málaga
+12,22,5,Felipe Castro,Expedición Cascadas Agua Clara
+13,8,4,Sofía Jiménez,Ruta Café y Aventura
+13,11,5,Sofía Jiménez,Tour Pueblos Patrimonio
+13,13,4,Sofía Jiménez,Street Food La Candelaria
+13,17,5,Sofía Jiménez,Taller Ceviche Nikkei
+13,24,3,Sofía Jiménez,Tour Gastronómico Pacífico
+14,6,5,Ricardo Gómez,Isla Barú Day Pass Deluxe
+14,9,4,Ricardo Gómez,Parapente San Félix Pro
+14,10,5,Ricardo Gómez,Cañoning Cascada Cristal
+14,19,5,Ricardo Gómez,Buceo Avistamiento de Ballenas
+14,25,4,Ricardo Gómez,Safari Llanero Sunrise
+15,2,3,Patricia Díaz,Chiva Rumbera Sunset
+15,14,4,Patricia Díaz,Experiencia Cervecera Artesanal
+15,16,5,Patricia Díaz,Picnic Gourmet Simón Bolívar
+15,18,4,Patricia Díaz,Brunch Fusión Dominguero
+15,28,5,Patricia Díaz,Glamping Estrellas del Llano

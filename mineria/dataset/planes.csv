@@ -1,0 +1,31 @@
+plan_id,nombre,tipo_sitio,ciudad,precio,valoracion_prom,empresa
+1,Exploración Murallas de Cartagena,Cultural,Cartagena,320000,4.7,Caribe Aventuras SAS
+2,Chiva Rumbera Sunset,Aventura,Cartagena,280000,4.5,Caribe Aventuras SAS
+3,Snorkel en Islas del Rosario,Aventura,Cartagena,450000,4.8,Caribe Aventuras SAS
+4,Tour Gastronómico Caribe Fusión,Gastronómico,Cartagena,360000,4.6,Caribe Aventuras SAS
+5,Kayak Nocturno en la Ciénaga,Aventura,Cartagena,310000,4.4,Caribe Aventuras SAS
+6,Isla Barú Day Pass Deluxe,Relax,Cartagena,520000,4.9,Caribe Aventuras SAS
+7,Caminata Piedra del Peñol 360°,Aventura,Medellín,340000,4.7,Andes Trekking Co
+8,Ruta Café y Aventura,Cultural,Medellín,390000,4.5,Andes Trekking Co
+9,Parapente San Félix Pro,Aventura,Medellín,280000,4.6,Andes Trekking Co
+10,Cañoning Cascada Cristal,Aventura,Medellín,410000,4.8,Andes Trekking Co
+11,Tour Pueblos Patrimonio,Cultural,Medellín,360000,4.4,Andes Trekking Co
+12,Senderismo Nocturno Arví,Aventura,Medellín,260000,4.3,Andes Trekking Co
+13,Street Food La Candelaria,Gastronómico,Bogotá,220000,4.5,Sabores Urbanos LTDA
+14,Experiencia Cervecera Artesanal,Gastronómico,Bogotá,240000,4.4,Sabores Urbanos LTDA
+15,Arte Urbano Chapinero,Cultural,Bogotá,180000,4.6,Sabores Urbanos LTDA
+16,Picnic Gourmet Simón Bolívar,Relax,Bogotá,260000,4.3,Sabores Urbanos LTDA
+17,Taller Ceviche Nikkei,Gastronómico,Bogotá,280000,4.7,Sabores Urbanos LTDA
+18,Brunch Fusión Dominguero,Gastronómico,Bogotá,240000,4.2,Sabores Urbanos LTDA
+19,Buceo Avistamiento de Ballenas,Aventura,Buenaventura,620000,4.9,Pacífico Dive Tours
+20,Snorkel Manglares La Barra,Aventura,Buenaventura,380000,4.6,Pacífico Dive Tours
+21,Kayak Bahía de Málaga,Aventura,Buenaventura,290000,4.4,Pacífico Dive Tours
+22,Expedición Cascadas Agua Clara,Aventura,Buenaventura,410000,4.5,Pacífico Dive Tours
+23,Pesca Artesanal Comunitaria,Cultural,Buenaventura,260000,4.3,Pacífico Dive Tours
+24,Tour Gastronómico Pacífico,Gastronómico,Buenaventura,240000,4.2,Pacífico Dive Tours
+25,Safari Llanero Sunrise,Aventura,Villavicencio,450000,4.8,Llanos Eco Travel
+26,Cabalgata Río Meta,Aventura,Villavicencio,320000,4.5,Llanos Eco Travel
+27,Ruta del Cacao Experiencial,Cultural,Villavicencio,280000,4.4,Llanos Eco Travel
+28,Glamping Estrellas del Llano,Relax,Villavicencio,580000,4.9,Llanos Eco Travel
+29,Avistamiento Aves Humedales,Aventura,Villavicencio,260000,4.3,Llanos Eco Travel
+30,Parrando Llanero Tradicional,Cultural,Villavicencio,300000,4.6,Llanos Eco Travel
