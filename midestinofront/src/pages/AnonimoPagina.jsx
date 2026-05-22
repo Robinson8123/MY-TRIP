@@ -79,6 +79,40 @@ export const AnonimoPagina = () => {
         </div>
       </section>
 
+      {/* Descarga App section */}
+      <section className="py-16 px-6 bg-gradient-to-r from-blue-600 to-indigo-700">
+        <div className="max-w-4xl mx-auto flex flex-col md:flex-row items-center gap-8">
+          <div className="text-white flex-1 text-center md:text-left">
+            <h2 className="text-3xl font-bold mb-3">Lleva Mi Destino en tu bolsillo</h2>
+            <p className="text-blue-100 mb-6">
+              Descarga la app Android y explora, compara y compra planes turísticos desde tu celular. Con recomendaciones IA y chatbot integrado.
+            </p>
+            <Link
+              to="/descargar-app"
+              className="inline-flex items-center gap-2 bg-white text-blue-700 font-bold px-6 py-3 rounded-xl hover:bg-blue-50 transition-all duration-200 shadow-lg"
+            >
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2.5"
+                  d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+              Descargar APK para Android
+            </Link>
+          </div>
+          <div className="flex gap-4 text-white text-center">
+            {[
+              { val: "30+", label: "Planes" },
+              { val: "IA", label: "Recomendaciones" },
+              { val: "🤖", label: "Chatbot" },
+            ].map((stat) => (
+              <div key={stat.label} className="bg-white/20 rounded-xl px-6 py-4">
+                <div className="text-2xl font-black">{stat.val}</div>
+                <div className="text-xs text-blue-100 mt-1">{stat.label}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </section>
+
       <Footer />
     </main>
   );

@@ -5,8 +5,9 @@ Expone el modelo como REST API para consumo desde Spring Boot.
 
 import os
 from fastapi import FastAPI, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
-from typing import List
+from typing import List, Optional
 import pandas as pd
 import sqlalchemy
 from dotenv import load_dotenv
@@ -18,6 +19,13 @@ app = FastAPI(
     title="Mi Destino - Servicio de Recomendaciones",
     description="Sistema de recomendación híbrido (colaborativo + contenido)",
     version="1.0.0"
+)
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],
+    allow_methods=["*"],
+    allow_headers=["*"],
 )
 
 # Conexión a la BD (producción) o datos demo (desarrollo)
@@ -49,6 +57,7 @@ class RecomendacionResponse(BaseModel):
     tipo_sitio: str
     score: float
     fuente: str
+    ciudad: Optional[str] = ""
 
 
 @app.get("/health")

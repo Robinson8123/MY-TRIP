@@ -31,3 +31,6 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### APK - demasiado grande para git, subir a Google Drive y configurar APK_DOWNLOAD_URL en Railway ###
+src/main/resources/static/apk/*.apk

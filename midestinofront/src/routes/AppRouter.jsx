@@ -14,6 +14,7 @@ import { useContext } from "react";
 import { Administrador } from "../pages/Administrador";
 import { PerfilUsuario } from "../pages/PerfilUsuario";
 import { RecomendacionesIA } from "../pages/RecomendacionesIA";
+import { DescargaApp } from "../pages/DescargaApp";
 
 export const AppRouter = () => {
   const { usuarioActivo, isUsuarioActivo } = useContext(UsuarioContext);
@@ -63,6 +64,7 @@ export const AppRouter = () => {
         </>
       )}
 
+      <Route path="/descargar-app" element={<DescargaApp />} />
       <Route path="*" element={<NotFound404 />} />
     </Routes>
   );
