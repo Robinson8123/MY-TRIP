@@ -15,8 +15,10 @@ RUN npm run build
 # ── Serve con Nginx ───────────────────────────────────────────
 FROM nginx:stable-alpine
 
+ENV PORT=80
+ENV BACKEND_URL=http://my-trip.railway.internal:9999
+
 COPY --from=build /app/dist /usr/share/nginx/html
-# Usar directorio templates para que nginx aplique envsubst automáticamente
 COPY nginx.conf /etc/nginx/templates/default.conf.template
 
 EXPOSE 80
