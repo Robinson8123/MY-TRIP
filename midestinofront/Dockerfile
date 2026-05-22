@@ -15,11 +15,8 @@ RUN npm run build
 # ── Serve con Nginx ───────────────────────────────────────────
 FROM nginx:stable-alpine
 
-ENV PORT=80
-ENV BACKEND_URL=http://my-trip.railway.internal:9999
-
 COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/templates/default.conf.template
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 80
-CMD ["/bin/sh", "-c", "envsubst '${PORT} ${BACKEND_URL}' < /etc/nginx/templates/default.conf.template > /etc/nginx/conf.d/default.conf && nginx -g 'daemon off;'"]
+CMD ["nginx", "-g", "daemon off;"]
