@@ -331,7 +331,7 @@ export const Chatbot = () => {
       </button>
 
       {isOpen && (
-        <div className="fixed bottom-24 right-6 z-40 w-96 h-[600px] bg-white rounded-lg shadow-2xl flex flex-col border border-gray-200">
+        <div className="fixed bottom-20 right-2 sm:bottom-24 sm:right-6 z-40 w-[calc(100vw-1rem)] sm:w-96 h-[80vh] sm:h-[600px] bg-white rounded-lg shadow-2xl flex flex-col border border-gray-200">
           <div className="bg-blue-600 text-white p-4 rounded-t-lg flex items-center justify-between">
             <div className="flex items-center space-x-3">
               <div className="w-10 h-10 bg-white rounded-full flex items-center justify-center">

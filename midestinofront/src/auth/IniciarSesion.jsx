@@ -6,13 +6,13 @@ export const IniciarSesion = () => {
 
   return (
     <>
-      <div className="pb-5 pt-5 pl-16 text-blue-500 hover:text-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
+      <div className="pb-5 pt-5 px-6 md:pl-16 text-blue-500 hover:text-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300">
         <Link to="/">Página principal</Link>
       </div>
 
-      <section className="w-full h-screen p-4 grid grid-cols-2 items-center">
+      <section className="w-full min-h-screen p-4 grid grid-cols-1 md:grid-cols-2 items-center">
         <form
-          className="w-[27rem] m-auto shadow-xl rounded-md p-4"
+          className="w-full max-w-[27rem] m-auto shadow-xl rounded-md p-4"
           onSubmit={onIniciarSesion}
         >
           <h2 className="text-4xl text-center font-semibold text-gray-900 mb-5">
@@ -89,7 +89,7 @@ export const IniciarSesion = () => {
           </button>
         </form>
 
-        <figure className="">
+        <figure className="hidden md:block">
           <img
             className="w-[90%] object-cover"
             src="/src/images/iniciarSesion.svg"

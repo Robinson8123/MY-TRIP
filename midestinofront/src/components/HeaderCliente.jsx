@@ -18,7 +18,7 @@ export const HeaderCliente = ({ handleOpenModalPresuento, titulo }) => {
       </div>
 
       {/* Header con info del usuario y navegación */}
-      <div className="flex justify-between items-center">
+      <div className="flex flex-wrap justify-between items-center gap-y-3">
         {/* Información del usuario */}
         <div className="flex items-center gap-3">
           <div className="w-12 h-12 bg-gradient-to-br from-blue-500 to-blue-600 rounded-full flex items-center justify-center text-white font-bold text-lg shadow-md">
