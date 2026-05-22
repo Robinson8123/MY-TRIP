@@ -1,7 +1,7 @@
 import { Navbar } from "../components/Navbar";
 import { Footer } from "../components/Footer";
 
-const API_URL = import.meta.env.VITE_API_URL || "http://localhost:9999/api";
+const APK_URL = "https://github.com/Robinson8123/MY-TRIP/releases/download/v1.0/MiDestino.apk";
 
 const features = [
   {
@@ -75,7 +75,7 @@ const pasos = [
 ];
 
 export const DescargaApp = () => {
-  const apkUrl = `${API_URL}/descarga/apk`;
+  const apkUrl = APK_URL;
 
   return (
     <main className="bg-gray-50 min-h-screen">
