@@ -18,7 +18,7 @@ FROM nginx:stable-alpine
 COPY --from=build /app/dist /usr/share/nginx/html
 COPY nginx.conf /etc/nginx/nginx.conf.template
 
-RUN apk add --no-cache gettext   ← esta línea falta
+RUN apk add --no-cache gettext
 
 EXPOSE 80
 
